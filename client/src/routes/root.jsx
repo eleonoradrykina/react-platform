@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Nav from "../components/svg/Nav";
+import Nav from "../components/Nav";
 import { getAuthData } from "../services/auth";
 
 const loader = async () => {

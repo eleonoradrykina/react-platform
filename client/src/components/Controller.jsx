@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Slider from './Slider'
 import ColorPicker from './ColorPicker'
+import '../index.css'
 
 
 const Controller = ({svg, handleClickStar, handleSvgChange, onLightsClick}) => {

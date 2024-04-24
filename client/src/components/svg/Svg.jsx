@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const Svg = ({svg, randomisation}) => {
 
     return (
-        <>
+        <div className='svg-wrapper'>
         <Moon closing = {svg.moon.moonClosing}/>
         <Sky hue1={svg.sky.hue1} hue2={svg.sky.hue2}/>
         <Mountains segments = {svg.mountains.segments} height = {svg.mountains.height} depth = {svg.mountains.depth} 
@@ -21,7 +21,7 @@ const Svg = ({svg, randomisation}) => {
           fillGradient={false}
           randomisation={randomisation}/>
         <Stars stars={svg.stars.stars} />
-        </>
+        </div>
     );
 
 }

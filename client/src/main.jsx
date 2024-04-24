@@ -9,6 +9,10 @@ import Root from "./routes/root";
 import "./styles/style.css";
 import Register from "./routes/auth/register";
 import ErrorPage from "./routes/error-page";
+import ArtworkDetail from "./routes/artworkDetail";
+import Profile from "./routes/auth/profile";
+import User from "./routes/user";
+
 
 const router = createBrowserRouter([
   {
@@ -20,10 +24,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Index />, loader: Index.loader },
       {
-        path: "/cheese/create",
+        path: "/artwork/create",
         element: <CreateArtwork />,
         action: CreateArtwork.action,
         loader: CreateArtwork.loader,
+      },
+      {
+        path: "/artwork/:id",
+        element: <ArtworkDetail />,
+        loader: ArtworkDetail.loader,
       },
       {
         path: "/auth/login",
@@ -35,6 +44,16 @@ const router = createBrowserRouter([
         path: "/auth/register",
         element: <Register />,
         action: Register.action,
+      },
+     {
+        path: "/auth/profile",
+        element: <Profile />,
+        loader: Profile.loader,
+      },
+      {
+        path: "/user/:id",
+        element: <User />,
+        loader: User.loader,
       },
     ],
   },

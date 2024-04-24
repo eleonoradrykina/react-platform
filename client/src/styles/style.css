@@ -1,0 +1,57 @@
+/* @import 'open-props/style'; */
+
+/* normalize and buttons are optional */
+/* but nice for starting something new */
+
+
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+:root {
+    --container-size: 60rem;
+    --text-1: var(--indigo-7);
+}
+
+body {
+    padding-top: var(--size-10);
+    flex-direction: column;
+}
+
+body:has(.animatehero) {
+    --animate: true;
+    padding-top: 70vh;
+}
+
+ol,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+main {
+    padding-top: var(--size-4);
+    max-width: var(--container-size);
+    margin: 0 auto;
+}
+
+input {
+    padding: var(--size-relative-3)
+}

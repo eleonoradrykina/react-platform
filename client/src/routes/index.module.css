@@ -1,0 +1,21 @@
+.listItem {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2rem;
+    padding: 2rem;
+    border-bottom: 1px solid #636cff;
+    background-color: #ccc;
+    color: black;
+}
+
+.listItem:hover {
+    background-color: #c3c6ff;
+    color: white;
+    box-shadow: #ccc 0 0 10px;
+}
+
+.list {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+}

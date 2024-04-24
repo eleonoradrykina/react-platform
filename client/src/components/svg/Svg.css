@@ -1,3 +1,7 @@
+@import 'open-props/normalize';
+@import 'open-props/buttons';
+
+
 .mountains,
 .sky {
     width: 100vw;
@@ -19,4 +23,22 @@
     top: 10%;
     left: 10%;
     z-index: -1;
+}
+
+#hidden {
+    display: none;
+}
+
+.button {
+    margin: 0;
+    font-size: var(--font-size-3);
+
+    padding-inline: var(--size-8);
+    padding-block: var(--size-3);
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-2);
+
+    background: var(--text-1);
+    text-shadow: 0 1px 0 var(--indigo-9);
+    color: rgb(223, 215, 215);
 }
