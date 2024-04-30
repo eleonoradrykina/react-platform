@@ -4,7 +4,7 @@ const fetchApi = async (
     {
         endpoint,
         query = undefined,
-        wrappedByKey = "data",
+        wrappedByKey = undefined,
         wrappedByList = undefined,
     },
     options

@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const loader = async ({ params }) => {
   const user = await getUserById(params.id);
-//   console.log("user", user)
+  console.log("user", user)
   return { user };
 };
 
@@ -17,9 +17,9 @@ const User = () => {
       <section>
         <h3>Mountains</h3>
         <ul>
-          {user.artwork.map((artwork) => (
+          {user.artworks.map((artwork) => (
             <li key={artwork.id}>
-              <Link to={`/artwork/${artwork.id}`}>{artwork.name}</Link>
+              <Link to={`/artwork/${artwork.id}`}>{artwork.id}</Link>
             </li>
           ))}
         </ul>

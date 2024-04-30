@@ -10,6 +10,7 @@ import "./styles/style.css";
 import Register from "./routes/auth/register";
 import ErrorPage from "./routes/error-page";
 import ArtworkDetail from "./routes/artworkDetail";
+import EditArtwork from "./routes/editArtwork";
 import Profile from "./routes/auth/profile";
 import User from "./routes/user";
 
@@ -28,6 +29,12 @@ const router = createBrowserRouter([
         element: <CreateArtwork />,
         action: CreateArtwork.action,
         loader: CreateArtwork.loader,
+      },
+      {
+        path: "/artwork/edit/:id",
+        element: <EditArtwork />,
+        action: EditArtwork.action,
+        loader: EditArtwork.loader,
       },
       {
         path: "/artwork/:id",

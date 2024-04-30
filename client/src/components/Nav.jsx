@@ -9,7 +9,6 @@ const Nav = () => {
         <Link to="/" className={' '}>
           <h1>React platform</h1>
         </Link>
-
         <AuthStatus />
       </div>
     </div>
