@@ -2,6 +2,7 @@ import { Link, useRouteLoaderData } from "react-router-dom";
 import styles from "./Nav.module.css";
 import { logout } from "../services/auth"
 import { BsPersonCircle } from "react-icons/bs";
+import { IconContext } from "react-icons";
 
 const AuthStatus = () => {
 
@@ -18,7 +19,10 @@ const AuthStatus = () => {
       Create & save Artwork
     </Link>
     <Link className={styles.iconButton} to="/auth/profile">
+
+    <IconContext.Provider value={{size: '2rem' }}>
       <BsPersonCircle  />
+      </IconContext.Provider>
     </Link>
     <button className={styles.button} onClick = {()=> handleLogOut()}>
      Log out

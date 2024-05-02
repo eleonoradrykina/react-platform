@@ -1,6 +1,6 @@
 import { Link, redirect, useFetcher, useLoaderData } from "react-router-dom";
 import { getAuthData, getMe } from "../../services/auth";
-import { deleteArtwork } from "../services/artwork";
+// import { deleteArtwork } from "../services/artwork";
 
 const loader = async ({ request }) => {
   const { user } = getAuthData();

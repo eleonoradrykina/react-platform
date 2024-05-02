@@ -1,4 +1,4 @@
-/* @import 'open-props/style'; */
+@import 'open-props/style';
 
 /* normalize and buttons are optional */
 /* but nice for starting something new */
@@ -54,4 +54,8 @@ main {
 
 input {
     padding: var(--size-relative-3)
+}
+
+h1 {
+    font-weight: 600;
 }

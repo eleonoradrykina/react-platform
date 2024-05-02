@@ -4,18 +4,18 @@
     grid-gap: 2rem;
     padding: 2rem;
     border-bottom: 1px solid #636cff;
-    background-color: #ccc;
+    background-color: #dedddd;
     color: black;
 }
 
 .listItem:hover {
     background-color: #c3c6ff;
-    color: white;
+    color: var(--text-1-light);
     box-shadow: #ccc 0 0 10px;
 }
 
 .list {
     display: grid;
-    grid-gap: 2rem;
+    gap: var(--size-6);
     grid-template-columns: 1fr 1fr;
 }
