@@ -15,6 +15,7 @@ import Profile from "./routes/auth/profile";
 import User from "./routes/user";
 
 
+
 const router = createBrowserRouter([
   {
     id: "root",
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
         path: "/artwork/:id",
         element: <ArtworkDetail />,
         loader: ArtworkDetail.loader,
+        action: ArtworkDetail.action,
       },
       {
         path: "/auth/login",

@@ -19,7 +19,7 @@ const Index = () => {
       {artworks.map((artwork) => (
         <li key={artwork.id} className={indexStyles.listItem}>
           <Link to={`/artwork/${artwork.id}`}>
-         <p>Artwork no. {artwork.id} with randomisation {artwork.randomisation}</p>
+         <p>Mountains no. {artwork.id} with randomisation {artwork.randomisation}</p>
          </Link>
   
         </li>

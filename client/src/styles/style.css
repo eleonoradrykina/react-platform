@@ -1,4 +1,4 @@
-@import 'open-props/style';
+/* @import 'open-props/style'; */
 
 /* normalize and buttons are optional */
 /* but nice for starting something new */
@@ -47,13 +47,9 @@ ul {
 }
 
 main {
-    padding-top: var(--size-4);
+    padding-top: 2rem;
     max-width: var(--container-size);
     margin: 0 auto;
-}
-
-input {
-    padding: var(--size-relative-3)
 }
 
 h1 {

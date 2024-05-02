@@ -1,6 +1,6 @@
-import { Link, redirect, useFetcher, useLoaderData } from "react-router-dom";
+import { Link, redirect, useLoaderData } from "react-router-dom";
 import { getAuthData, getMe } from "../../services/auth";
-// import { deleteArtwork } from "../services/artwork";
+import { deleteArtwork } from "../../services/artwork";
 
 const loader = async ({ request }) => {
   const { user } = getAuthData();
@@ -9,39 +9,37 @@ const loader = async ({ request }) => {
     params.set("from", new URL(request.url).pathname);
     return redirect("/auth/login?" + params.toString());
   }
-
   const profile = await getMe();
+  
+    console.log("profile", profile);
   return { profile };
+
 };
 
 const Profile = () => {
   const { profile } = useLoaderData();
-  const fetcher = useFetcher();
-  let isLoggingOut = fetcher.formData != null;
+
+  const handleDelete = async (id) => {
+    await deleteArtwork(id);
+    window.location.reload();
+    
+  }
 
   return (
     <>
-      <h2>About Me</h2>
+      <h2>Welcome back, {profile.username}!</h2>
       <dl>
-        <dt>name</dt>
-        <dd>{profile.username}</dd>
-        <dt>email</dt>
+        <dt>Your email:</dt>
         <dd>{profile.email}</dd>
-        <dt>Authentication</dt>
-        <dd>
-          <fetcher.Form method="post" action="/auth/logout">
-            <button type="submit" disabled={isLoggingOut}>
-              {isLoggingOut ? "Signing out..." : "Sign out"}
-            </button>
-          </fetcher.Form>
-        </dd>
       </dl>
-      <section>
-        <h3>My artworks:</h3>
-        <ul>
+        <p>Creating mountains since {profile.createdAt.slice(0, 10)}</p>
+      <section >
+        <h3>Your artworks:</h3>
+        <ul className="list-artworks">
           {profile.artworks.map((artwork) => (
-            <li key={artwork.id}>
-              <Link to={`/artwork/${artwork.id}`}>{artwork.randomisation}</Link>
+            <li className="list-artwork-item" key={artwork.id}>
+              <Link to={`/artwork/${artwork.id}`}>Mountains no. {artwork.id} with randomisation {artwork.randomisation}</Link>
+              <button className={'delete'} onClick={() => handleDelete(artwork.id)}>X DELETE</button>
             </li>
           ))}
         </ul>

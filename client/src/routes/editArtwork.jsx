@@ -149,7 +149,7 @@ console.log("localSvg", localSvg);
         <input type="text" id="hidden" name="svg" value={JSON.stringify(svg)} readOnly={true} />
         <input  type="number" step="any" id="hidden" name="randomisation" value={randomisation} readOnly={true} />
          <input
-       className="buttons-container"
+        className="button"
         type="submit"
         value="Save changes"
       />

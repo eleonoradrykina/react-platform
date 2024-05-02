@@ -12,14 +12,14 @@ const User = () => {
   return (
     <>
       <h2>{user.username}</h2>
-      <p>Creating mountains since {user.createdAt}</p>
+      <p>Creating mountains since {user.createdAt.slice(0, 10)}</p>
 
-      <section>
-        <h3>Mountains</h3>
+      <section className="user-section">
+        <h3>Mountains:</h3>
         <ul>
           {user.artworks.map((artwork) => (
             <li key={artwork.id}>
-              <Link to={`/artwork/${artwork.id}`}>{artwork.id}</Link>
+              <Link to={`/artwork/${artwork.id}`}>Mountains no. {artwork.id}</Link>
             </li>
           ))}
         </ul>

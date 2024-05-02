@@ -171,7 +171,7 @@ const CreateArtwork = () => {
         <input  type="number" step="any" id="hidden" name="randomisation" value={randomisation} readOnly={true} />
          {isLoggedIn && ( 
       <input
-       className="buttons-container"
+       className="button"
         type="submit"
         value="Save this artwork"
       />
