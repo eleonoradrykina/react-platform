@@ -2,7 +2,11 @@ import { getToken } from "./auth";
 import { fetchApi, unwrapAtributes } from "./strapi";
 
 const getArtworks = async () => {
-    const artworks = await fetchApi({ endpoint: "artworks", wrappedByKey: "data" });
+    const artworks = await fetchApi({
+        endpoint: "artworks",
+        query: { populate: ["owner", "likes"] },
+        wrappedByKey: "data"
+    });
     if (!artworks) return [];
     return artworks.map(unwrapAtributes);
 };
@@ -39,6 +43,7 @@ const updateArtwork = async (id, data) => {
     );
     return response;
 };
+
 const deleteArtwork = async (id) => {
     const response = await fetchApi(
         {
@@ -54,6 +59,7 @@ const deleteArtwork = async (id) => {
     );
     return response;
 };
+
 const getArtworkById = async (id) => {
     const artwork = await fetchApi({
         endpoint: `artworks/${id}`,
@@ -63,4 +69,78 @@ const getArtworkById = async (id) => {
     return unwrapAtributes(artwork);
 };
 
-export { getArtworks, createArtwork, getArtworkById, updateArtwork, deleteArtwork };
+
+const likeArtwork = async (artworkId, userId) => {
+    try {
+        // Step 1: Create the Like
+        const likeResponse = await fetchApi(
+            {
+                endpoint: `likes`,
+                query: {
+                    populate: {
+                        user: true,
+                        artwork: {
+                            populate: {
+                                owner: {
+                                    populate: 'username' // Populate the username from the user
+                                }
+                            }
+                        }
+                    }
+                },
+
+            },
+            {
+                method: "POST",
+                body: {
+                    data: {
+                        artwork: artworkId,
+                        user: userId
+                    }
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            }
+        );
+
+        if (!likeResponse || !likeResponse.data || !likeResponse.data.id) {
+            throw new Error('Failed to create like');
+        }
+
+        // Step 2: Update the Artwork to include the new Like
+        const updateResponse = await fetchApi(
+            {
+                endpoint: `artworks/${artworkId}`,
+            },
+            {
+                method: "PUT",
+                body: {
+                    data: {
+                        likes: [likeResponse.data.id] // Assuming we're directly setting the new like
+                    }
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            }
+        );
+
+        return updateResponse;
+
+    } catch (error) {
+        console.error('Error in likeArtwork:', error);
+        throw error;
+    }
+};
+
+// const fetchLikeWithPopulatedData = async (likeId) => {
+//     return await fetchApi({
+//         endpoint: `likes/${likeId}`,
+//         query: { populate: { user: '*', artwork: '*' } },
+//         wrappedByKey: "data",
+//     });
+// };
+export { getArtworks, createArtwork, getArtworkById, updateArtwork, deleteArtwork, likeArtwork };

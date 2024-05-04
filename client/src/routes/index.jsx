@@ -20,6 +20,7 @@ const Index = () => {
         <li key={artwork.id} className={indexStyles.listItem}>
           <Link to={`/artwork/${artwork.id}`}>
          <p>Mountains no. {artwork.id} with randomisation {artwork.randomisation}</p>
+         <div> <span>{artwork.fav || 0} {(artwork.fav === 1) ? 'like' : 'likes'}</span></div>
          </Link>
   
         </li>

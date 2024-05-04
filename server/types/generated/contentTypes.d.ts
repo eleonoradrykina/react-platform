@@ -381,6 +381,12 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    likes: Attribute.Relation<
+      'api::artwork.artwork',
+      'oneToMany',
+      'api::like.like'
+    >;
+    fav: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -394,6 +400,37 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLikeLike extends Schema.CollectionType {
+  collectionName: 'likes';
+  info: {
+    singularName: 'like';
+    pluralName: 'likes';
+    displayName: 'Like';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    artwork: Attribute.Relation<
+      'api::like.like',
+      'oneToOne',
+      'api::artwork.artwork'
+    >;
+    user: Attribute.Relation<
+      'api::like.like',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::like.like', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::like.like', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -731,7 +768,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -764,6 +800,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'oneToMany',
       'api::artwork.artwork'
+    >;
+    likes: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::like.like'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -840,6 +881,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::artwork.artwork': ApiArtworkArtwork;
+      'api::like.like': ApiLikeLike;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

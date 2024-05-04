@@ -23,8 +23,8 @@ let isLoggedIn = false;
   const formData = await request.formData();
    const svg = formData.get('svg');
   const randomisation = formData.get('randomisation');
-  console.log(svg, randomisation);
-  
+  const likes = formData.get('likes');
+
   console.log("SVG Data", svg);
   console.log("Randomisation Data", randomisation);
   
@@ -33,6 +33,7 @@ let isLoggedIn = false;
   data.svg = JSON.parse(data.svg);
 
   data.randomisation = randomisation;
+  data.favs = likes;
   console.log("formdata3", data);
   await createArtwork(data);
   return redirect(`/`);
@@ -43,14 +44,7 @@ const loader = async ({ request }) => {
   if (!user) {
     let params = new URLSearchParams();
     params.set("from", new URL(request.url).pathname);
-    // return redirect("/auth/login?" + params.toString());
-    /*
-
-    ASK SIMON ABOUT THIS!!!!!!
-    I don't want to redirect to login page if user is not logged in, I only need boolean
-
-    */
-    return null;
+    return user;
   }
   isLoggedIn = true;
   console.log("user", user);
@@ -169,6 +163,7 @@ const CreateArtwork = () => {
       <div>
         <input type="text" id="hidden" name="svg" value={JSON.stringify(svg)} readOnly={true} />
         <input  type="number" step="any" id="hidden" name="randomisation" value={randomisation} readOnly={true} />
+        <input  type="number" step="any" id="hidden" name="favs" value={0} readOnly={true} />
          {isLoggedIn && ( 
       <input
        className="button"

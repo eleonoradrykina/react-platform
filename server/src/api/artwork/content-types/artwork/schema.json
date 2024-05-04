@@ -23,6 +23,14 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "artworks"
+    },
+    "likes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::like.like"
+    },
+    "fav": {
+      "type": "integer"
     }
   }
 }

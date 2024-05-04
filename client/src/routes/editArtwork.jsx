@@ -5,9 +5,9 @@ import { gsap } from "gsap";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react"
 import { Form, redirect, useLoaderData } from "react-router-dom";
-import { updateArtwork } from "../services/artwork";
+import { updateArtwork, getArtworkById } from "../services/artwork";
 import { getAuthData } from "../services/auth";
-import { getArtworkById } from "../services/artwork";
+
 
 
 const randomisation = Math.random() + 0.5;
@@ -22,21 +22,17 @@ let isLoggedIn = false;
 
  const action = async ({ request, params }) => {
   const formData = await request.formData();
-  const svg = formData.get('svg');
+
   const randomisation = formData.get('randomisation');
-  console.log(svg, randomisation);
-  
-  console.log("SVG Data", svg);
   console.log("Randomisation Data", randomisation);
   
   const data = Object.fromEntries(formData);
-  console.log("formdata2", data);
-  data.svg = JSON.parse(data.svg);
 
+  data.svg = JSON.parse(data.svg);
   data.randomisation = randomisation;
-  console.log("formdata3", data);
+
   await updateArtwork(params.id, data);
-  return redirect(`/`);
+  return redirect(`/artwork/${params.id}`);
     };
 
 
@@ -72,8 +68,8 @@ const EditArtwork = () => {
     const container = useRef();
     const { contextSafe } = useGSAP({ scope: container });
 
-let localSvg = artwork.svg;
-console.log("localSvg", localSvg);
+    let localSvg = artwork.svg;
+    console.log("localSvg", localSvg);
 
     const [svg, setSvg] = useState (localSvg);
 
